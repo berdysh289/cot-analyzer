@@ -92,6 +92,63 @@ st.markdown(
 
 }
 
+        /* =========================
+    MTF CONFIRMATION CARDS
+    ========================= */
+
+    .mtf-card {
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin-bottom: 12px;
+    }
+
+    .mtf-title {
+        font-size: 0.9rem;
+        opacity: 0.70;
+        margin-bottom: 8px;
+    }
+
+    .mtf-content {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .mtf-score {
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    .mtf-status {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+
+    /* Mobile */
+    @media (max-width: 768px) {
+
+        .mtf-card {
+            padding: 14px 16px;
+            margin-bottom: 8px;
+        }
+
+        .mtf-content {
+            justify-content: space-between;
+        }
+
+        .mtf-score {
+            font-size: 1.25rem;
+        }
+
+        .mtf-status {
+            font-size: 0.9rem;
+            text-align: right;
+        }
+    }
+
+
     </style>
     """,
     unsafe_allow_html=True
@@ -188,20 +245,36 @@ try:
     # REGIME CONFIRMATION
     # =========================
 
+    st.markdown("#### MTF Confirmation")
+
     confirmation_col1, confirmation_col2 = st.columns(2)
 
     with confirmation_col1:
-        st.write("**Asset Manager MTF Confirmation**")
-        st.write(
-            f"{regime['asset_mtf_score']}/3 — "
-            f"**{regime['asset_mtf_status']}**"
+        st.markdown(
+            f"""
+            <div class="mtf-card">
+                <div class="mtf-title">Asset Manager</div>
+                <div class="mtf-content">
+                    <span class="mtf-score">{regime['asset_mtf_score']}/3</span>
+                    <span class="mtf-status">{regime['asset_mtf_status']}</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
     with confirmation_col2:
-        st.write("**Leveraged Funds MTF Confirmation**")
-        st.write(
-            f"{regime['leveraged_mtf_score']}/3 — "
-            f"**{regime['leveraged_mtf_status']}**"
+        st.markdown(
+            f"""
+            <div class="mtf-card">
+                <div class="mtf-title">Leveraged Funds</div>
+                <div class="mtf-content">
+                    <span class="mtf-score">{regime['leveraged_mtf_score']}/3</span>
+                    <span class="mtf-status">{regime['leveraged_mtf_status']}</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
     regime_col1, regime_col2, regime_col3 = st.columns(3)
