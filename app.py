@@ -62,6 +62,35 @@ st.markdown(
         }
 
     }
+    
+    /* =========================
+   MOBILE METRICS
+   ========================= */
+
+@media (max-width: 768px) {
+
+    /* Metric containers */
+    div[data-testid="stMetric"] {
+        background-color: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 8px;
+    }
+
+    /* Metric label */
+    div[data-testid="stMetricLabel"] {
+        font-size: 0.85rem;
+        opacity: 0.75;
+    }
+
+    /* Metric value */
+    div[data-testid="stMetricValue"] {
+        font-size: 1.8rem;
+        line-height: 1.15;
+    }
+
+}
 
     </style>
     """,
