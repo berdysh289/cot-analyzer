@@ -148,6 +148,28 @@ st.markdown(
         }
     }
 
+            /* =========================================
+        MULTI-TIMEFRAME CONTEXT
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            /* Multi-Timeframe columns */
+            div[data-testid="stHorizontalBlock"] {
+                gap: 0.75rem;
+            }
+
+            /* Reduce unnecessary spacing on mobile */
+            div[data-testid="stVerticalBlock"] {
+                gap: 0.55rem;
+            }
+
+            /* Horizontal rules */
+            hr {
+                margin-top: 0.7rem !important;
+                margin-bottom: 0.7rem !important;
+            }
+        }
 
     </style>
     """,
@@ -406,7 +428,10 @@ try:
 
     st.markdown("### Multi-Timeframe Context")
 
-    mtf_col1, mtf_col2, mtf_col3 = st.columns(3)
+    mtf_col1, mtf_col2, mtf_col3 = st.columns(
+        3,
+        gap="medium"
+    )
 
     # Short-Term
     with mtf_col1:
@@ -865,10 +890,46 @@ try:
 
     st.dataframe(
         timeframe_table,
-        use_container_width=True,
-        hide_index=True
+        width="stretch",
+        hide_index=True,
+        height=385,
+        column_config={
+            "Participant": st.column_config.TextColumn(
+                "Participant",
+                width="medium"
+            ),
+            "Type": st.column_config.TextColumn(
+                "Type",
+                width="small"
+            ),
+            "1W": st.column_config.TextColumn(
+                "1W",
+                width="small"
+            ),
+            "1M": st.column_config.TextColumn(
+                "1M",
+                width="small"
+            ),
+            "3M": st.column_config.TextColumn(
+                "3M",
+                width="small"
+            ),
+            "6M": st.column_config.TextColumn(
+                "6M",
+                width="small"
+            ),
+            "1Y": st.column_config.TextColumn(
+                "1Y",
+                width="small"
+            ),
+            "3Y": st.column_config.TextColumn(
+                "3Y",
+                width="small"
+            ),
+        }
     )
-        # =========================
+    
+    # =========================
     # COT POSITIONING CHART
     # =========================
 
@@ -1091,7 +1152,8 @@ try:
                 line_dash="dash",
                 annotation_text=(
                     f"3Y Long Mean: {long_mean:,.0f}"
-                )
+                ),
+                annotation_position="top left"
             )
 
             fig.add_hline(
@@ -1099,7 +1161,8 @@ try:
                 line_dash="dot",
                 annotation_text=(
                     f"3Y Short Mean: {short_mean:,.0f}"
-                )
+                ),
+                annotation_position="bottom left"
             )
 
     # ==========================================
@@ -1168,12 +1231,13 @@ try:
             historical_mean = mean_df[column].mean()
 
             fig.add_hline(
-                y=historical_mean,
-                line_dash="dash",
-                annotation_text=(
-                    f"3Y Mean: {historical_mean:,.0f}"
-                )
-            )
+    y=historical_mean,
+    line_dash="dash",
+    annotation_text=(
+        f"3Y Mean: {historical_mean:,.0f}"
+    ),
+    annotation_position="top left"
+    )
 
     # ==========================================
     # ZERO LINE
@@ -1194,20 +1258,38 @@ try:
         y_axis_title = f"{position_type} Position"
 
     fig.update_layout(
-        height=600,
+        height=450,
         xaxis_title="Report Date",
         yaxis_title=y_axis_title,
         hovermode="x unified",
+
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="left",
+            x=0
+        ),
+
         margin=dict(
-            l=20,
-            r=20,
-            t=30,
-            b=20
-        )
+            l=5,
+            r=5,
+            t=60,
+            b=10
+        ),
+
+        dragmode="pan"
+    )
+
+    fig.update_xaxes(
+        automargin=True,
+        nticks=5
     )
 
     fig.update_yaxes(
-        tickformat=","
+        tickformat=",",
+        automargin=True,
+        nticks=6
     )
 
     st.plotly_chart(
