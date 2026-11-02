@@ -15,6 +15,59 @@ st.set_page_config(
     layout="wide"
 )
 
+# =========================
+# RESPONSIVE / MOBILE CSS
+# =========================
+
+st.markdown(
+    """
+    <style>
+
+    /* Mobile layout */
+    @media (max-width: 768px) {
+
+        /* Reduce page side padding */
+        .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 1.5rem;
+        }
+
+        /* Main title */
+        h1 {
+            font-size: 2rem !important;
+        }
+
+        /* Section headers */
+        h2 {
+            font-size: 1.55rem !important;
+        }
+
+        h3 {
+            font-size: 1.3rem !important;
+        }
+
+        /* Make Streamlit metrics smaller */
+        [data-testid="stMetricValue"] {
+            font-size: 2rem !important;
+        }
+
+        [data-testid="stMetricLabel"] {
+            font-size: 0.9rem !important;
+        }
+
+        /* Reduce space between elements */
+        [data-testid="stVerticalBlock"] {
+            gap: 0.75rem;
+        }
+
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("COT Analyzer")
 
 st.write("Institutional positioning analysis")
